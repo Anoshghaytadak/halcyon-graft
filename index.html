@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Halcyon Graft — Keep what's you. Upgrade the rest.</title>
+<meta name="description" content="Halcyon Graft designs neural-linked prosthetics and sensory implants. Book a consult to see what's possible.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👁</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --graphite:#141922; --panel:#1c232e; --line:#2e3846;
+  --titanium:#cdd3db; --mute:#8d98a8;
+  --skin:#eab9a2; --signal:#4fe0cf; --warn:#ff6a3d;
+  --machine:"Chakra Petch",system-ui,sans-serif;
+  --human:"Fraunces",Georgia,serif;
+  --pad:clamp(1.25rem,5vw,4rem);
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--graphite);color:var(--titanium);font-family:var(--machine);line-height:1.6;font-size:1.0625rem;overflow-x:hidden}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--signal);outline-offset:3px}
+.wrap{max-width:1160px;margin:0 auto;padding:0 var(--pad)}
+h1,h2,h3{font-family:var(--human);font-weight:400;line-height:1.08;letter-spacing:-.01em}
+h2{font-size:clamp(2rem,4.4vw,3.2rem);max-width:18ch}
+h3{font-size:1.5rem}
+p{max-width:62ch}
+.btn{display:inline-block;font-family:var(--machine);font-weight:600;font-size:1rem;padding:.85rem 1.5rem;text-decoration:none;border:1.5px solid var(--signal);color:var(--graphite);background:var(--signal);cursor:pointer;clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,12px 100%,0 calc(100% - 12px));transition:background .2s,color .2s}
+.btn:hover{background:transparent;color:var(--signal)}
+.btn.ghost{background:transparent;color:var(--titanium);border-color:var(--line)}
+.btn.ghost:hover{border-color:var(--titanium)}
+
+/* nav */
+header{position:sticky;top:0;z-index:20;background:rgba(20,25,34,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{font-family:var(--human);font-size:1.4rem;text-decoration:none;display:flex;align-items:center;gap:.5rem}
+.logo i{width:14px;height:14px;border-radius:50%;background:linear-gradient(90deg,var(--skin) 50%,var(--signal) 50%)}
+.links{display:flex;gap:1.75rem;align-items:center}
+.links a{text-decoration:none;color:var(--mute);font-size:.95rem}
+.links a:hover{color:var(--titanium)}
+.menu{display:none;background:none;border:1px solid var(--line);color:var(--titanium);padding:.4rem .8rem;font:inherit;cursor:pointer}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1.05fr 1fr;gap:3rem;align-items:center;padding:clamp(2.5rem,6vw,5rem) 0}
+.hero h1{font-size:clamp(2.6rem,6.2vw,5rem);margin-bottom:1.25rem}
+.hero h1 em{font-style:italic;color:var(--skin)}
+.hero h1 span{font-family:var(--machine);font-weight:600;color:var(--signal);letter-spacing:-.03em}
+.hero p{color:var(--mute);margin-bottom:2rem}
+.cta{display:flex;gap:1rem;flex-wrap:wrap}
+.eye{position:relative;width:100%;max-width:480px;aspect-ratio:1;margin:0 auto;justify-self:center}
+.eye svg{position:absolute;inset:0;width:100%;height:100%}
+.eye .machine{clip-path:inset(0 0 0 50%)}
+.eye .seam{position:absolute;top:0;bottom:0;left:50%;width:2px;background:var(--signal);box-shadow:0 0 14px var(--signal);pointer-events:none}
+.eye .seam::after{content:"";position:absolute;top:50%;left:50%;width:34px;height:34px;transform:translate(-50%,-50%);border-radius:50%;background:var(--graphite);border:2px solid var(--signal);box-shadow:inset 0 0 0 6px var(--graphite),inset 0 0 0 8px var(--signal)}
+.eye input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;margin:0}
+.eye input:focus-visible+.seam{box-shadow:0 0 0 3px var(--graphite),0 0 0 5px var(--signal),0 0 14px var(--signal)}
+.eye .tag{position:absolute;bottom:-2.2rem;font-size:.85rem;color:var(--mute)}
+.eye .tag.l{left:0;font-family:var(--human);font-style:italic}
+.eye .tag.r{right:0;color:var(--signal)}
+
+/* sections */
+section{padding:clamp(3.5rem,8vw,7rem) 0;border-top:1px solid var(--line)}
+.lede{color:var(--mute);margin-top:1rem}
+
+/* modules */
+.mods{display:grid;grid-template-columns:260px 1fr;gap:2rem;margin-top:3rem}
+.tabs{display:flex;flex-direction:column;gap:.5rem}
+.tab{text-align:left;font:inherit;font-weight:500;background:none;color:var(--mute);border:1px solid var(--line);padding:1rem 1.1rem;cursor:pointer;display:flex;justify-content:space-between;transition:.2s}
+.tab small{font-size:.8rem;opacity:.8}
+.tab[aria-selected=true]{color:var(--graphite);background:var(--titanium);border-color:var(--titanium)}
+.panel{background:var(--panel);border:1px solid var(--line);padding:clamp(1.5rem,3vw,2.5rem);display:grid;grid-template-columns:1fr 1fr;gap:2rem;min-height:340px}
+.panel[hidden]{display:none}
+.panel h3{margin-bottom:.75rem}
+.panel p{color:var(--mute)}
+.specs{list-style:none;padding:0;display:grid;gap:.9rem;align-content:start}
+.specs li{border-left:2px solid var(--signal);padding-left:1rem}
+.specs b{display:block;font-size:1.5rem;font-weight:600;color:var(--titanium)}
+.specs span{font-size:.9rem;color:var(--mute)}
+
+/* telemetry */
+.tele{display:grid;grid-template-columns:1fr 1.2fr;gap:3rem;align-items:center}
+.scope{background:var(--panel);border:1px solid var(--line);padding:1rem}
+.scope canvas{width:100%;height:180px;display:block}
+.read{display:flex;gap:2rem;flex-wrap:wrap;margin-top:1rem;font-size:.9rem;color:var(--mute)}
+.read b{color:var(--signal);font-size:1.3rem;font-weight:600;display:block}
+.read .h b{color:var(--skin)}
+
+/* process */
+.steps{list-style:none;padding:0;margin-top:3rem;display:grid;grid-template-columns:repeat(4,1fr);gap:0;counter-reset:s}
+.steps li{counter-increment:s;padding:1.5rem 1.5rem 0 0;border-top:2px solid var(--line);position:relative}
+.steps li::before{content:counter(s);position:absolute;top:-14px;left:0;width:26px;height:26px;background:var(--graphite);border:2px solid var(--signal);color:var(--signal);font-size:.8rem;font-weight:700;display:grid;place-items:center}
+.steps h3{font-size:1.3rem;margin:.6rem 0 .4rem}
+.steps p{color:var(--mute);font-size:.95rem}
+
+/* quote */
+blockquote{font-family:var(--human);font-size:clamp(1.5rem,3.2vw,2.4rem);font-style:italic;font-weight:300;line-height:1.3;max-width:30ch}
+cite{display:block;margin-top:1.5rem;font-style:normal;font-family:var(--machine);font-size:.95rem;color:var(--mute)}
+
+/* form */
+.book{display:grid;grid-template-columns:1fr 1fr;gap:3rem}
+form{display:grid;gap:1rem}
+label{font-size:.95rem;display:grid;gap:.35rem}
+input[type=text],input[type=email],select{font:inherit;background:var(--panel);color:var(--titanium);border:1px solid var(--line);padding:.8rem 1rem;width:100%}
+input:focus,select:focus{border-color:var(--signal);outline:none;box-shadow:0 0 0 3px rgba(79,224,207,.25)}
+.msg{padding:1rem 1.2rem;border-left:3px solid var(--signal);background:var(--panel)}
+.err{color:var(--warn);font-size:.9rem;min-height:1.2em}
+
+footer{border-top:1px solid var(--line);padding:2rem 0;color:var(--mute);font-size:.9rem}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+
+@media (max-width:860px){
+  .hero,.tele,.book{grid-template-columns:1fr}
+  .eye{margin-bottom:2.5rem}
+  .mods{grid-template-columns:1fr}
+  .tabs{flex-direction:row;overflow-x:auto;padding-bottom:.25rem}
+  .tab{white-space:nowrap}.tab small{display:none}
+  .panel{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr 1fr;gap:2.5rem 0}
+  .menu{display:block}
+  .links{display:none;position:absolute;top:64px;left:0;right:0;flex-direction:column;align-items:flex-start;background:var(--graphite);padding:1.25rem var(--pad);border-bottom:1px solid var(--line)}
+  .links.open{display:flex}
+}
+@media (max-width:480px){.steps{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap" aria-label="Main">
+    <a class="logo" href="#top"><i></i>Halcyon Graft</a>
+    <button class="menu" aria-expanded="false" aria-controls="links">Menu</button>
+    <div class="links" id="links">
+      <a href="#modules">Modules</a>
+      <a href="#signal">Signal</a>
+      <a href="#process">Process</a>
+      <a class="btn" href="#book">Book a consult</a>
+    </div>
+  </nav>
+</header>
+
+<main id="top">
+<div class="wrap">
+  <div class="hero">
+    <div>
+      <h1>Keep what's <em>you.</em><br>Upgrade <span>the rest.</span></h1>
+      <p>Halcyon Graft builds neural-linked prosthetics and sensory implants that move, see and hear with you, not for you. Drag across the eye to see where the human ends.</p>
+      <div class="cta">
+        <a class="btn" href="#book">Book a consult</a>
+        <a class="btn ghost" href="#modules">Explore modules</a>
+      </div>
+    </div>
+    <div class="eye" id="eye">
+      <svg class="human" viewBox="0 0 400 400" role="img" aria-label="A human eye"></svg>
+      <svg class="machine" viewBox="0 0 400 400" aria-hidden="true"></svg>
+      <input type="range" min="5" max="95" value="50" aria-label="Reveal the machine eye" id="slider">
+      <div class="seam" id="seam"></div>
+      <span class="tag l">Human</span><span class="tag r">Graft v4</span>
+    </div>
+  </div>
+</div>
+
+<section id="modules">
+  <div class="wrap">
+    <h2>Four modules. Each one built around a body part you already use.</h2>
+    <p class="lede">Choose a module to see what it replaces, what it adds, and how long recovery takes.</p>
+    <div class="mods">
+      <div class="tabs" role="tablist" aria-label="Modules">
+        <button class="tab" role="tab" aria-selected="true" aria-controls="p0" id="t0">Vision <small>Eye</small></button>
+        <button class="tab" role="tab" aria-selected="false" aria-controls="p1" id="t1" tabindex="-1">Limb <small>Arm / Hand</small></button>
+        <button class="tab" role="tab" aria-selected="false" aria-controls="p2" id="t2" tabindex="-1">Hearing <small>Ear</small></button>
+        <button class="tab" role="tab" aria-selected="false" aria-controls="p3" id="t3" tabindex="-1">Recall <small>Cortex</small></button>
+      </div>
+      <div>
+        <div class="panel" role="tabpanel" id="p0" aria-labelledby="t0">
+          <div><h3>Vision Graft</h3><p>A retinal-linked lens that restores sight and adds low-light, zoom and thermal overlays. Switch modes by looking at the corner of your vision for a second.</p></div>
+          <ul class="specs"><li><b>14 stops</b><span>of added dynamic range</span></li><li><b>8× zoom</b><span>with no head movement</span></li><li><b>3 weeks</b><span>to full calibration</span></li></ul>
+        </div>
+        <div class="panel" id="p1" role="tabpanel" aria-labelledby="t1" hidden>
+          <div><h3>Limb Graft</h3><p>A titanium-and-carbon arm wired into your motor nerves. You think "grip," it grips, and fingertip sensors send pressure back as real touch.</p></div>
+          <ul class="specs"><li><b>42 N</b><span>grip force, adjustable per finger</span></li><li><b>9 ms</b><span>from intent to movement</span></li><li><b>10 weeks</b><span>to full strength training</span></li></ul>
+        </div>
+        <div class="panel" id="p2" role="tabpanel" aria-labelledby="t2" hidden>
+          <div><h3>Hearing Graft</h3><p>A cochlear implant with directional focus. Pick out one voice in a loud room, or stream calls straight to the auditory nerve.</p></div>
+          <ul class="specs"><li><b>20 Hz–40 kHz</b><span>usable range</span></li><li><b>−30 dB</b><span>background noise, filtered live</span></li><li><b>2 weeks</b><span>to full calibration</span></li></ul>
+        </div>
+        <div class="panel" id="p3" role="tabpanel" aria-labelledby="t3" hidden>
+          <div><h3>Recall Graft</h3><p>A cortical index that tags what you see and hear, so you can search your own day. Everything stays on the implant. Nothing is uploaded unless you say so.</p></div>
+          <ul class="specs"><li><b>30 days</b><span>of searchable memory</span></li><li><b>0 bytes</b><span>sent to the cloud by default</span></li><li><b>6 weeks</b><span>to learn the query gestures</span></li></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="signal">
+  <div class="wrap tele">
+    <div>
+      <h2>Your nerves talk. The graft listens.</h2>
+      <p class="lede">This is a simulated feed of a Limb Graft. The orange trace is the neural signal from the arm. The teal trace is the graft's reply, about 9 ms later.</p>
+    </div>
+    <div>
+      <div class="scope"><canvas id="scope" aria-label="Simulated neural signal and graft response" role="img"></canvas></div>
+      <div class="read">
+        <div class="h"><b id="hz">72</b>Neural bursts / min</div>
+        <div><b id="ms">9.0 ms</b>Response lag</div>
+        <div><b>99.2%</b>Grip accuracy</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="process">
+  <div class="wrap">
+    <h2>From first call to first movement.</h2>
+    <ol class="steps">
+      <li><h3>Consult</h3><p>Meet a surgeon and an engineer. Tell us what you want to do again, or do for the first time.</p></li>
+      <li><h3>Scan</h3><p>A 3D map of your nerves and bones, so the graft fits you rather than a standard size.</p></li>
+      <li><h3>Graft</h3><p>Outpatient surgery of 2 to 5 hours. Most people go home the next day.</p></li>
+      <li><h3>Calibrate</h3><p>Weekly sessions tune the link until it feels like part of you. We stay on call for life.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <blockquote>"For eleven years I held my coffee with my left hand and felt nothing. The first morning with the graft, I felt it was hot."
+      <cite>Marisol Vega, Limb Graft, 14 months in</cite></blockquote>
+  </div>
+</section>
+
+<section id="book">
+  <div class="wrap book">
+    <div>
+      <h2>Book a free consult.</h2>
+      <p class="lede">A 30-minute video call, no obligation. We reply within two working days.</p>
+    </div>
+    <form id="form" novalidate>
+      <label>Full name<input type="text" name="name" autocomplete="name" required></label>
+      <label>Email<input type="email" name="email" autocomplete="email" required></label>
+      <label>Module you're curious about
+        <select name="mod"><option>Vision</option><option>Limb</option><option>Hearing</option><option>Recall</option><option>Not sure yet</option></select>
+      </label>
+      <div class="err" id="err" role="alert"></div>
+      <button class="btn" type="submit">Request consult</button>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer><div class="wrap"><span>© 2026 Halcyon Graft. Concept design, not a real medical product.</span><span>Made for a cyborg-themed landing page project.</span></div></footer>
+
+<script>
+(function(){
+  var NS="http://www.w3.org/2000/svg";
+  function el(t,a,p){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e}
+
+  /* ---- Human eye ---- */
+  var h=document.querySelector(".eye .human");
+  var d=el("defs",{},h);
+  var g=el("radialGradient",{id:"iris"},d);
+  [["0","#3b2a1a"],["55%","#8a6a3a"],["100%","#4a6b4a"]].forEach(function(s){el("stop",{offset:s[0],"stop-color":s[1]},g)});
+  el("circle",{cx:200,cy:200,r:190,fill:"#e9b8a1"},h);
+  el("circle",{cx:200,cy:200,r:150,fill:"#f3e9e4"},h);
+  el("circle",{cx:200,cy:200,r:100,fill:"url(#iris)"},h);
+  for(var i=0;i<72;i++){var a=i*Math.PI/36,r1=34,r2=96+(i%3)*2;
+    el("line",{x1:200+Math.cos(a)*r1,y1:200+Math.sin(a)*r1,x2:200+Math.cos(a)*r2,y2:200+Math.sin(a)*r2,stroke:i%2?"#c9a566":"#2a1d10","stroke-width":1.2,opacity:.55},h)}
+  el("circle",{cx:200,cy:200,r:100,fill:"none",stroke:"#2a1d10","stroke-width":5},h);
+  el("circle",{cx:200,cy:200,r:34,fill:"#0b0b0d"},h);
+  el("ellipse",{cx:170,cy:168,rx:16,ry:11,fill:"#fff",opacity:.85,transform:"rotate(-30 170 168)"},h);
+  el("path",{d:"M10 200 Q200 20 390 200",fill:"none",stroke:"#c98f77","stroke-width":6},h);
+  el("path",{d:"M10 200 Q200 380 390 200",fill:"none",stroke:"#c98f77","stroke-width":3,opacity:.6},h);
+  for(var j=0;j<14;j++){var b=Math.PI*(1.08+j*.0585)-.1;
+    el("line",{x1:200+Math.cos(b)*178,y1:200+Math.sin(b)*98*1.0,x2:200+Math.cos(b)*196,y2:200+Math.sin(b)*98*1.3,stroke:"#3a2a22","stroke-width":2,"stroke-linecap":"round"},h)}
+
+  /* ---- Machine eye ---- */
+  var m=document.querySelector(".eye .machine");
+  var dm=el("defs",{},m);
+  var cg=el("radialGradient",{id:"chrome"},dm);
+  [["0","#2a3442"],["70%","#10151c"],["100%","#05080b"]].forEach(function(s){el("stop",{offset:s[0],"stop-color":s[1]},cg)});
+  var gl=el("radialGradient",{id:"glow"},dm);
+  [["0","#4fe0cf",1],["60%","#1a8f87",.8],["100%","#0b2b2c",1]].forEach(function(s){var st=el("stop",{offset:s[0],"stop-color":s[1]},gl)});
+  el("circle",{cx:200,cy:200,r:190,fill:"#a9b2be"},m);
+  el("circle",{cx:200,cy:200,r:176,fill:"#2b3340"},m);
+  for(var t=0;t<120;t++){var ang=t*Math.PI/60,len=t%5?6:14;
+    el("line",{x1:200+Math.cos(ang)*170,y1:200+Math.sin(ang)*170,x2:200+Math.cos(ang)*(170-len),y2:200+Math.sin(ang)*(170-len),stroke:t%5?"#6b7787":"#4fe0cf","stroke-width":t%5?1:2},m)}
+  el("circle",{cx:200,cy:200,r:140,fill:"url(#chrome)",stroke:"#cdd3db","stroke-width":4},m);
+  el("circle",{cx:200,cy:200,r:112,fill:"none",stroke:"#4fe0cf","stroke-width":3,"stroke-dasharray":"4 6"},m);
+  el("circle",{cx:200,cy:200,r:96,fill:"url(#glow)"},m);
+  var bl=el("g",{id:"blades"},m);
+  for(var k=0;k<8;k++){el("path",{d:"M200 200 L200 104 A96 96 0 0 1 268 132 Z",fill:"#0d1218",stroke:"#4fe0cf","stroke-width":1.2,opacity:.92,transform:"rotate("+(k*45)+" 200 200)"},bl)}
+  el("circle",{cx:200,cy:200,r:26,fill:"#04070a",stroke:"#ff6a3d","stroke-width":3},m);
+  el("circle",{cx:200,cy:200,r:8,fill:"#ff6a3d"},m);
+  el("path",{d:"M120 150 A100 100 0 0 1 190 112",fill:"none",stroke:"#fff","stroke-width":5,"stroke-linecap":"round",opacity:.5},m);
+
+  /* ---- Slider ---- */
+  var s=document.getElementById("slider"),seam=document.getElementById("seam");
+  function set(v){m.style.clipPath="inset(0 0 0 "+v+"%)";seam.style.left=v+"%"}
+  s.addEventListener("input",function(){set(s.value)});
+  set(50);
+  var reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if(!reduce){ /* one intro sweep to show the interaction */
+    var t0=null,played=true;
+    function sweep(ts){if(!t0)t0=ts;var p=(ts-t0)/2400;if(p>=1||!played){set(s.value);return}
+      var v=50+Math.sin(p*Math.PI*2)*38*(1-p);set(v);requestAnimationFrame(sweep)}
+    s.addEventListener("pointerdown",function(){played=false},{once:true});
+    setTimeout(function(){requestAnimationFrame(sweep)},500);
+  }
+  /* blades slowly rotate */
+  if(!reduce){var rot=0;(function spin(){rot+=.15;bl.setAttribute("transform","rotate("+rot+" 200 200)");requestAnimationFrame(spin)})()}
+
+  /* ---- Tabs ---- */
+  var tabs=[].slice.call(document.querySelectorAll(".tab"));
+  function pick(i){tabs.forEach(function(t,n){var on=n===i;t.setAttribute("aria-selected",on);t.tabIndex=on?0:-1;document.getElementById("p"+n).hidden=!on});tabs[i].focus()}
+  tabs.forEach(function(t,i){t.addEventListener("click",function(){pick(i)});
+    t.addEventListener("keydown",function(e){var n=tabs.length;
+      if(e.key==="ArrowRight"||e.key==="ArrowDown"){e.preventDefault();pick((i+1)%n)}
+      if(e.key==="ArrowLeft"||e.key==="ArrowUp"){e.preventDefault();pick((i+n-1)%n)}})});
+
+  /* ---- Scope ---- */
+  var cv=document.getElementById("scope"),cx=cv.getContext("2d"),W,H,ph=0;
+  function size(){var r=devicePixelRatio||1;W=cv.clientWidth;H=cv.clientHeight;cv.width=W*r;cv.height=H*r;cx.setTransform(r,0,0,r,0,0)}
+  size();addEventListener("resize",size);
+  function sig(x){var u=((x%160)+160)%160;var spike=Math.exp(-Math.pow((u-40)/5,2))*1-Math.exp(-Math.pow((u-48)/6,2))*.5;return spike+Math.sin(x*.07)*.06+Math.sin(x*.31)*.04}
+  var hz=document.getElementById("hz"),ms=document.getElementById("ms"),fr=0;
+  function draw(){
+    cx.clearRect(0,0,W,H);
+    cx.strokeStyle="#2e3846";cx.lineWidth=1;
+    for(var gx=0;gx<W;gx+=40){cx.beginPath();cx.moveTo(gx,0);cx.lineTo(gx,H);cx.stroke()}
+    for(var gy=0;gy<H;gy+=30){cx.beginPath();cx.moveTo(0,gy);cx.lineTo(W,gy);cx.stroke()}
+    function trace(off,col,base,amp){cx.beginPath();cx.strokeStyle=col;cx.lineWidth=2;cx.shadowColor=col;cx.shadowBlur=8;
+      for(var x=0;x<W;x++){var y=base-sig(x+ph-off)*amp;x?cx.lineTo(x,y):cx.moveTo(x,y)}cx.stroke();cx.shadowBlur=0}
+    trace(0,"#ff6a3d",H*.34,H*.24);
+    trace(9,"#4fe0cf",H*.76,H*.24);
+    if(!reduce){ph+=1.2;fr++;if(fr%20===0){hz.textContent=70+Math.round(Math.random()*5);ms.textContent=(8.6+Math.random()*.8).toFixed(1)+" ms"}}
+    requestAnimationFrame(draw)}
+  draw();
+
+  /* ---- Mobile menu ---- */
+  var mb=document.querySelector(".menu"),lk=document.getElementById("links");
+  mb.addEventListener("click",function(){var o=lk.classList.toggle("open");mb.setAttribute("aria-expanded",o)});
+  lk.addEventListener("click",function(e){if(e.target.tagName==="A"){lk.classList.remove("open");mb.setAttribute("aria-expanded","false")}});
+
+  /* ---- Form ---- */
+  var f=document.getElementById("form"),err=document.getElementById("err");
+  f.addEventListener("submit",function(e){e.preventDefault();
+    var n=f.name.value.trim(),em=f.email.value.trim();
+    if(!n){err.textContent="Enter your full name.";f.name.focus();return}
+    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)){err.textContent="Enter a valid email, like name@example.com.";f.email.focus();return}
+    var box=document.createElement("div");box.className="msg";box.setAttribute("role","status");
+    box.textContent="Request sent. We'll email "+em+" within two working days to book your "+f.mod.value+" consult.";
+    f.replaceWith(box)});
+})();
+</script>
+</body>
+</html>
